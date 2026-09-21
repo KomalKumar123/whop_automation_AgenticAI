@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campaign-Aware Content Evaluator & Optimizer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-container">
+      <div class="logo-icon">C</div>
+      <div>
+        <h1>Campaign-Aware Content Evaluator</h1>
+        <div class="subtitle">Multi-Agent Quality & Compliance Optimizer</div>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <label style="margin: 0; display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; cursor: pointer;">
+        <input type="checkbox" id="chkFastModel" checked>
+        <span>Use Fast Model (Llama 3.2 1B)</span>
+      </label>
+      <span class="badge-mode">Ollama Local AI</span>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <div class="container">
+    <div class="grid-layout">
+      
+      <!-- Input Column -->
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📝 Input Content & Campaign</span>
+            <button class="btn-secondary" id="btnLoadSample">Load Sample Data</button>
+          </div>
+          
+          <div class="form-group">
+            <label for="txtCampaign">Campaign Requirements</label>
+            <textarea id="txtCampaign" rows="8" placeholder="Paste campaign requirements text here..."></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="txtScript">Content Script / Transcript</label>
+            <textarea id="txtScript" rows="10" placeholder="Paste proposed script or video text here..."></textarea>
+          </div>
+          
+          <div class="btn-row">
+            <button class="btn-primary" id="btnEvaluate">
+              <span id="spinner" class="spinner" style="display: none;"></span>
+              <span id="btnText">Evaluate & Optimize</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Output / Results Column -->
+      <div>
+        <div class="card" id="resultsCard">
+          <div class="card-header">
+            <span class="card-title">📊 Evaluation Dashboard</span>
+            <span id="lblRevisionCount" style="font-size: 0.8rem; color: var(--text-dim);">Revisions: 0</span>
+          </div>
+
+          <!-- Empty State -->
+          <div id="emptyState" class="empty-state">
+            <div class="empty-icon">🚀</div>
+            <p>Click <strong>"Evaluate & Optimize"</strong> to run the multi-agent workflow against your campaign and script.</p>
+          </div>
+
+          <!-- Results Content (Hidden initially) -->
+          <div id="resultsContent" style="display: none;">
+            
+            <!-- Status Banner -->
+            <div id="statusBanner" class="status-banner">
+              <div>
+                <div class="status-title" id="lblDecisionTitle">APPROVED</div>
+                <div class="status-meta" id="lblDecisionMeta">All compliance checks passed and quality score >= 8.0</div>
+              </div>
+            </div>
+
+            <!-- Metrics Boxes -->
+            <div class="metrics-row">
+              <div class="metric-box">
+                <div class="metric-value" id="valFeasibility">Pass</div>
+                <div class="metric-label">Feasibility</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-value" id="valCompliance">Pass</div>
+                <div class="metric-label">Compliance</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-value" id="valQuality">0.0</div>
+                <div class="metric-label">Quality Score</div>
+              </div>
+            </div>
+
+            <!-- Content Quality Bars -->
+            <div style="margin-bottom: 1.5rem;">
+              <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text-muted);">
+                CONTENT QUALITY DIMENSIONS (0 - 10)
+              </div>
+              <div class="quality-grid" id="qualityGrid">
+                <!-- Dynamic quality bars injected here -->
+              </div>
+            </div>
+
+            <!-- Requirements Analysis Breakdown -->
+            <div style="margin-bottom: 1.5rem;">
+              <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text-muted);">
+                REQUIREMENTS ANALYSIS
+              </div>
+              <div id="analysisList">
+                <!-- Dynamic requirement items injected here -->
+              </div>
+            </div>
+
+            <!-- Revision History -->
+            <div id="revisionHistoryContainer" style="margin-bottom: 1.5rem; display: none;">
+              <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text-muted);">
+                REVISION HISTORY
+              </div>
+              <div id="revisionList"></div>
+            </div>
+
+            <!-- Final Script View -->
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">FINAL OPTIMIZED SCRIPT</span>
+                <button class="btn-secondary" id="btnCopyScript" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;">Copy Script</button>
+              </div>
+              <textarea id="txtFinalScript" rows="8" readonly></textarea>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
